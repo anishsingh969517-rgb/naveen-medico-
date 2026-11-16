@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naveen Medico Agencies</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f3f6;font-family:Arial;color:#172337}
+header{background:#2874f0;color:white;padding:15px}
+.top{max-width:1100px;margin:auto}
+.logo{font-size:23px;font-weight:bold}
+.logo span{color:#ffe500}
+.search{margin-top:14px;display:flex;background:white;border-radius:5px;overflow:hidden}
+.search input{width:100%;padding:13px;border:0;outline:0;font-size:15px}
+.search button{border:0;background:white;padding:12px;color:#2874f0}
+nav{background:white;padding:13px;display:flex;justify-content:center;gap:25px;flex-wrap:wrap}
+nav a{color:#172337;text-decoration:none;font-weight:bold;font-size:13px}
+main{max-width:1100px;margin:20px auto;padding:12px}
+.banner{background:linear-gradient(120deg,#2874f0,#73a6ff);padding:27px 20px;color:white;border-radius:8px}
+.banner h1{font-size:25px;margin:0 0 10px}
+.section{background:white;padding:18px;margin-top:18px;border-radius:7px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+select{padding:10px;border:1px solid #ddd;border-radius:5px;background:white}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.product{border:1px solid #eee;border-radius:7px;padding:14px;text-align:center}
+.picture{height:105px;background:#edf4ff;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:45px}
+.product h3{font-size:15px}
+.product p{color:#2874f0;font-weight:bold}
+.tag{font-size:11px;color:#64748b}
+footer{text-align:center;padding:25px;color:#65748b}
+@media(max-width:600px){
+.products{grid-template-columns:repeat(2,1fr)}
+.banner h1{font-size:21px}
+nav{gap:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="top">
+<div class="logo">NAVEEN <span>MEDICO</span></div>
+<small>AGENCIES | BUSINESS DEMO</small>
+<div class="search">
+<input id="search" placeholder="Search demo items..." oninput="render()">
+<button onclick="render()">⌕</button>
+</div>
+</div>
+</header>
+
+<nav>
+<a href="#home">HOME</a>
+<a href="#catalogue">CATALOGUE</a>
+<a href="#about">ABOUT</a>
+<a href="#contact">CONTACT</a>
+</nav>
+
+<main id="home">
+<div class="banner">
+<h1>Welcome to Naveen Medico Agencies</h1>
+<p>Explore our sample business catalogue.</p>
+<strong>Professional Website Demo</strong>
+</div>
+
+<section class="section" id="catalogue">
+<h2>Sample Catalogue</h2>
+<p class="tag">All items below are fictional demonstration entries.</p>
+
+<div class="tools">
+<select id="category" onchange="render()">
+<option value="all">All categories</option>
+<option value="A">Category A</option>
+<option value="B">Category B</option>
+<option value="C">Category C</option>
+</select>
+
+<select id="sort" onchange="render()">
+<option value="default">Default sorting</option>
+<option value="low">Price: Low to High</option>
+<option value="high">Price: High to Low</option>
+<option value="az">Name: A to Z</option>
+</select>
+</div>
+
+<div class="products" id="products"></div>
+</section>
+
+<section class="section" id="about">
+<h2>About Us</h2>
+<p>Naveen Medico Agencies – Medical Wholesale Business.</p>
+<p>This is a demonstration website for learning website development.</p>
+</section>
+
+<section class="section" id="contact">
+<h2>Contact Information</h2>
+<p>Business: Naveen Medico Agencies</p>
+<p>Contact details: To be updated by the business owner.</p>
+</section>
+</main>
+
+<footer>
+Naveen Medico Agencies © 2026<br>
+Fictional Catalogue Demonstration
+</footer>
+
+<script>
+const items=[
+{name:"Demo Product 01",price:120,category:"A",icon:"📦"},
+{name:"Demo Product 02",price:250,category:"B",icon:"🗂️"},
+{name:"Demo Product 03",price:80,category:"A",icon:"🧴"},
+{name:"Demo Product 04",price:350,category:"C",icon:"📋"},
+{name:"Demo Product 05",price:180,category:"B",icon:"🧰"},
+{name:"Demo Product 06",price:90,category:"C",icon:"📁"}
+];
+
+function render(){
+let q=document.getElementById("search").value.toLowerCase();
+let c=document.getElementById("category").value;
+let s=document.getElementById("sort").value;
+
+let result=items.filter(p=>
+p.name.toLowerCase().includes(q)&&
+(c==="all"||p.category===c)
+);
+
+if(s==="low")result.sort((a,b)=>a.price-b.price);
+if(s==="high")result.sort((a,b)=>b.price-a.price);
+if(s==="az")result.sort((a,b)=>a.name.localeCompare(b.name));
+
+document.getElementById("products").innerHTML=
+result.length?result.map(p=>`
+<div class="product">
+<div class="picture">${p.icon}</div>
+<h3>${p.name}</h3>
+<p>₹${p.price}</p>
+<small>Category ${p.category}</small>
+<div class="tag">Fictional demo item</div>
+</div>
+`).join(""):"No demo items found.";
+}
+render();
+</script>
+</body>
+</html>
