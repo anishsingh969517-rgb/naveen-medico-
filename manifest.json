@@ -1,0 +1,12 @@
+
+{
+  "name": "Naveen Medico Inventory Demo",
+  "short_name": "Naveen Medico",
+  "description": "Internal fictional inventory demonstration",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6f8",
+  "theme_color": "#087c55",
+  "orientation": "portrait"
+}
